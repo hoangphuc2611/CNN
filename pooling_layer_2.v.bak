@@ -1,0 +1,16 @@
+module pooling_layer_2 #(parameter BIT_WIDTH = 16, MAPS = 6)(
+
+
+);
+
+
+generate
+	for (g = 0; g < 6; g = g+1) begin : S2_op
+		maxpool22 #(.BIT_WIDTH(HALF_WIDTH)) S2_POOL (
+			.clk(clk), //.rst(rst),
+			.en(S2_en),
+			.in1(rb_C1S2[g]), .in2(C1_relu[g]),
+			.maxOut(S2_poolOut[g])
+		);
+	end
+endgenerate

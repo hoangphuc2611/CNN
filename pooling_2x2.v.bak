@@ -1,0 +1,38 @@
+module maxpool22 #(parameter IN_WIDTH = 32, SIZE = 2) (
+    input clk,
+    input en,
+    input signed[IN_WIDTH-1:0] in1, in2,
+    output signed[IN_WIDTH-1:0] maxOut,
+);
+
+reg signed[IN_WIDTH-1:0] matrix[0:1][0:SIZE-1];
+
+MatrixUpdate #(.IN_WIDTH(IN_WIDTH), .SIZE(SIZE)) MU (
+    .clk(clk),
+    .en(en),
+    .in1(in1),
+    .in2(in2),
+    .matrix(matrix)
+);
+
+// find max
+wire signed[IN_WIDTH-1:0] maxR1, maxR2;
+max #(.IN_WIDTH(IN_WIDTH)) M1 (
+    .in1(matrix[0][0]),
+    .in2(matrix[0][1]),
+    .max(maxR1)
+);
+
+max #(.IN_WIDTH(IN_WIDTH)) M2 (
+    .in1(matrix[1][0]),
+    .in2(matrix[1][1]),
+    .max(maxR2)
+);
+
+max #(.IN_WIDTH(IN_WIDTH)) M0 (
+    .in1(maxR1),
+    .in2(maxR2),
+    .max(maxOut)
+);
+
+endmodule

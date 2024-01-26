@@ -18,7 +18,7 @@ module lenet_top_module #(parameter IMAGE_SIZE = 32, IN_WIDTH = 8, OUT_WIDTH = 3
 	// CONVOLUTIONAL LAYER 1
 	wire [OUT_WIDTH*C1_MAPS - 1 : 0] out_C1;
 	
-	convolutional_layer_1 #(.IN_WIDTH(IN_WIDTH), .OUT_WIDTH(OUT_WIDTH), .MAPS(C1_MAPS)) (
+	convolutional_layer_1 #(.IN_WIDTH(IN_WIDTH), .OUT_WIDTH(OUT_WIDTH), .MAPS(C1_MAPS) (
 		.in(input_pixel), .clk(clk), .en(1'b1), .read(read), .out(out_C1)
 	);	
 	
@@ -28,7 +28,7 @@ module lenet_top_module #(parameter IMAGE_SIZE = 32, IN_WIDTH = 8, OUT_WIDTH = 3
 	// CONVOLUTIONAL LAYER 3
 	wire [OUT_WIDTH*C3_MAPS - 1 : 0] out_C3;
 	
-	convolutional_layer_3 #(.IN_WIDTH(OUT_WIDTH), .OUT_WIDTH(OUT_WIDTH), .MAPS(C3_MAPS)) (
+	convolutional_layer_3 #(.IN_WIDTH(OUT_WIDTH), .OUT_WIDTH(OUT_WIDTH), .MAPS(C3_MAPS) (
 		.in(out_S2), .clk(clk), .en(en_C3), .read(read), .out(out_C3)
 	);	
 	
@@ -38,7 +38,7 @@ module lenet_top_module #(parameter IMAGE_SIZE = 32, IN_WIDTH = 8, OUT_WIDTH = 3
 	// CONVOLUTIONAL LAYER 5
 	wire [OUT_WIDTH*C5_MAPS - 1 : 0] out_C5;
 	
-	convolutional_layer_5 #(.IN_WIDTH(OUT_WIDTH), .OUT_WIDTH(OUT_WIDTH), .MAPS(C5_MAPS)) (
+	convolutional_layer_5 #(.IN_WIDTH(OUT_WIDTH), .OUT_WIDTH(OUT_WIDTH), .MAPS(C5_MAPS) (
 		.in(out_S4), .clk(clk), .en(en_C5), .read(read), .out(out_C5)
 	);
 	
